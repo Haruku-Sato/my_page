@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Haruku Sato – Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f9fa;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #1a202c;
+      --muted: #718096;
+      --accent: #3b82f6;
+      --accent-light: #eff6ff;
+      --tag-bg: #f1f5f9;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+    }
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      flex-shrink: 0;
+    }
+    .hero-text h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+    .hero-text .subtitle {
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-text p { color: var(--muted); max-width: 480px; }
+    .hero-links {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #2563eb; }
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-footer {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .tag.deployed {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    /* ── MODAL ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 560px;
+      padding: 2rem;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: var(--tag-bg);
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: var(--border); }
+    .modal-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    .modal h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .modal .modal-desc {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .modal-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+      .hero-links { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <span class="logo">Haruku Sato</span>
+    <div class="nav-links">
+      <a href="#projects">Projects</a>
+      <a href="https://github.com/Haruku-Sato" target="_blank">GitHub</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <img
+      class="avatar"
+      src="https://avatars.githubusercontent.com/u/186650316?v=4"
+      alt="Haruku Sato"
+    />
+    <div class="hero-text">
+      <div class="subtitle">Vibe Coder</div>
+      <h1>Haruku Sato</h1>
+      <p>千葉工業大学の学生。バイブコーディングで作ったものをここにまとめています。Next.js / TypeScript 中心に開発中。</p>
+      <div class="hero-links">
+        <a class="btn btn-primary" href="https://github.com/Haruku-Sato" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a class="btn btn-ghost" href="mailto:s24G1064YJ@chibatech.ac.jp">
+          ✉ Contact
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-title">Projects</div>
+  <div class="grid" id="project-grid"></div>
+</section>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalBtn()">✕</button>
+    <div class="modal-icon" id="modal-icon"></div>
+    <h2 id="modal-title"></h2>
+    <p class="modal-desc" id="modal-desc"></p>
+    <div class="modal-tags" id="modal-tags"></div>
+    <div class="modal-actions" id="modal-actions"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Haruku Sato · Built with Vibe Coding
+</footer>
+
+<script>
+  const projects = [
+    {
+      id: "favorite_find",
+      name: "favorite find",
+      icon: "⭐",
+      color: "#fdf4ff",
+      shortDesc: "推しの情報を掴めるアプリ。",
+      fullDesc: "推しのアーティストやキャラクターの情報をまとめて把握できるWebアプリです。Next.js + TypeScript で構築し、Vercel にデプロイ済み。",
+      tags: ["TypeScript", "Next.js"],
+      github: "https://github.com/Haruku-Sato/favorite_find",
+      vercel: "https://favorite-find.vercel.app",
+    },
+    {
+      id: "web_vscode",
+      name: "web VSCode",
+      icon: "💻",
+      color: "#eff6ff",
+      shortDesc: "VSCode を開くのが面倒？軽量なブラウザ版エディタを作りました。",
+      fullDesc: "VSCode を起動するのが面倒な場面向けに作った、ブラウザで動く軽量コードエディタです。Next.js + TypeScript 構成で Vercel にデプロイ済み。",
+      tags: ["TypeScript", "Next.js", "CSS"],
+      github: "https://github.com/Haruku-Sato/web_vscode",
+      vercel: "https://web-vscode.vercel.app",
+    },
+    {
+      id: "caluculation",
+      name: "caluculation",
+      icon: "📐",
+      color: "#f0fdf4",
+      shortDesc: "変数の解を求めるサイト。グラフ作成と途中式も表示されます。",
+      fullDesc: "変数の解を求めるWebアプリです。使いにくい既存ツールへの不満から開発。グラフ作成機能と途中式の表示も実装。Python (FastAPI) + TypeScript のフルスタック構成で Vercel にデプロイ済み。",
+      tags: ["Python", "TypeScript", "Next.js"],
+      github: "https://github.com/Haruku-Sato/caluculation",
+      vercel: "https://caluculation.vercel.app",
+    },
+    {
+      id: "flowchart",
+      name: "flowchart",
+      icon: "🔀",
+      color: "#fff7ed",
+      shortDesc: "Arduino / C / C++ / C# のソースコードから直接フローチャートを自動生成。",
+      fullDesc: "Arduino (.ino) / C / C++ / C# のソースコードを貼り付けるだけでフローチャートを自動生成するWebアプリです。SVG・PNG・draw.io 形式でエクスポート可能。web-tree-sitter で AST 解析、Mermaid で描画。Vercel にデプロイ済み。",
+      tags: ["JavaScript", "HTML", "Mermaid"],
+      github: "https://github.com/Haruku-Sato/flowchart",
+      vercel: "https://flowchart-five-eta.vercel.app",
+    },
+    {
+      id: "govguide",
+      name: "GovGuide",
+      icon: "🗺️",
+      color: "#fff1f2",
+      shortDesc: "行政手続きをゲームのチュートリアル風に案内するシステム。",
+      fullDesc: "引越し・マイナンバー・確定申告などの行政手続きを、RPG のチュートリアル風に案内するシステム。行政担当者がノーコードでシナリオを作成し、既存の行政サイトに JS を1行追加するだけで動作するプレイヤーを埋め込めます。Next.js + TypeScript + Zustand 構成。",
+      tags: ["TypeScript", "Next.js", "Hackathon"],
+      github: "https://github.com/Haruku-Sato/GovGuide",
+      vercel: "",
+    },
+    {
+      id: "transceiver_logger",
+      name: "transceiver logger online",
+      icon: "📻",
+      color: "#f0f9ff",
+      shortDesc: "トランシーバの会話履歴を記録し、Excel へ出力。Web で共有・閲覧できるバージョン。",
+      fullDesc: "トランシーバの会話履歴をWebアプリで記録・管理し、Excel に出力できるツールです。複数人でリアルタイムに共有・閲覧できるオンライン版。Next.js + TypeScript + Tailwind CSS 構成。",
+      tags: ["TypeScript", "Next.js", "Tailwind"],
+      github: "https://github.com/Haruku-Sato/transceiver_logger_online",
+      vercel: "https://transceiver-logger-43m2.vercel.app/",
+    },
+  ];
+
+  function renderCards() {
+    const grid = document.getElementById("project-grid");
+    grid.innerHTML = projects.map(p => `
+      <div class="card" onclick="openModal('${p.id}')">
+        <div class="card-icon" style="background:${p.color}">${p.icon}</div>
+        <h3>${p.name}</h3>
+        <p>${p.shortDesc}</p>
+        <div class="card-footer">
+          ${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}
+          ${p.vercel ? `<span class="tag deployed">✓ Deployed</span>` : ""}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function openModal(id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+
+    document.getElementById("modal-icon").textContent = p.icon;
+    document.getElementById("modal-icon").style.background = p.color;
+    document.getElementById("modal-title").textContent = p.name;
+    document.getElementById("modal-desc").textContent = p.fullDesc;
+
+    document.getElementById("modal-tags").innerHTML =
+      p.tags.map(t => `<span class="tag">${t}</span>`).join("");
+
+    const actions = document.getElementById("modal-actions");
+    actions.innerHTML = `
+      <a class="btn btn-primary" href="${p.github}" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub で見る
+      </a>
+      ${p.vercel ? `<a class="btn btn-ghost" href="${p.vercel}" target="_blank">🚀 デプロイ先を開く</a>` : ""}
+    `;
+
+    document.getElementById("overlay").classList.add("open");
+  }
+
+  function closeModalBtn() {
+    document.getElementById("overlay").classList.remove("open");
+  }
+
+  function closeModal(e) {
+    if (e.target === document.getElementById("overlay")) {
+      document.getElementById("overlay").classList.remove("open");
+    }
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") document.getElementById("overlay").classList.remove("open");
+  });
+
+  renderCards();
+</script>
+</body>
+</html>
